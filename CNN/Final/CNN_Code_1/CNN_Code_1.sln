@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "CNN_Code_1", "CNN_Code_1\CNN_Code_1.pyproj", "{85F131EA-025D-4B17-9AED-94C6EA05DBF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85F131EA-025D-4B17-9AED-94C6EA05DBF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85F131EA-025D-4B17-9AED-94C6EA05DBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFC41EBF-CC72-41A3-B8A0-52D9BBAFDF8C}
+	EndGlobalSection
+EndGlobal
