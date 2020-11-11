@@ -48,7 +48,7 @@ for i=1:length(folders) %Loop through folders
             for j=0:numsamp-1 %j=1:numsamp
                 samples=[samples;S_dB(:,1+j*Limhop:Tindex+j*Limhop)];%[samples;S_dB(:,((j-1)*Tindex+1):j*Tindex)];%Split samples
             end
-        else
+        else %Example smaller then limit specified (
             Time_frameL=floor((Time_limit*fs-length(win)/2)*1/(length(win)-OL))+1;
             samples=[samples;[S_dB,zeros(length(f),Time_frameL-length(t))]];%Pad the time axes
         end
@@ -60,23 +60,21 @@ for i=1:length(folders) %Loop through folders
         S_dB=[]; 
     end
 end
-%FIX diffrent sample size due to diffrent PRF
-%[minsize, minidx] = min(cellfun('size', data, 2));%Temporary solution by trimming to smallest frame
-%data=cellfun(@(x) x(:,1:minsize),data,'uni',false);
+
 
 %Split original dataset into train, validation and test datasets based on the classes.
 a=unique(labels,'stable'); %extract unique classes in original dataset
 amount=cell2mat(cellfun(@(x) sum(ismember(labels,x)),a,'un',0));%determine number of examples per class in original dataset
 for i=1:length(a)
+    %Work out indices location of each dataset in original dataset
     val_len=floor(amount(i)*val_perc/100);
     test_len=floor(amount(i)*test_perc/100);
     train_len=amount(i)-val_len-test_len;
     indices = find(strcmp(labels, char(a(i))));
-    train_ind=indices(1:train_len);%indices(val_len+1:(train_len+val_len));%
-    val_ind=indices(train_len+1:(train_len+val_len));%indices(1:val_len);%
+    train_ind=indices(1:train_len);
+    val_ind=indices(train_len+1:(train_len+val_len));
     test_ind=indices((train_len+val_len+1):(train_len+val_len+test_len));
-    %Testing Indices every 100
-    %Split data
+    %Split into three datasets
     for j=1:train_len
         train_data=[train_data;data(train_ind(j))];
         train_labels=[train_labels;labels(train_ind(j))];
@@ -105,7 +103,7 @@ save('val_data.mat', 'val_data');
 save('val_labels.mat', 'val_labels');
 save('test_data.mat', 'test_data');
 save('test_labels.mat', 'test_labels');
-%Determine amount of diffrent classes
+%Determine number of diffrent classes
 a=unique(labels,'stable');
 amount=cellfun(@(x) sum(ismember(labels,x)),a,'un',0);
 for i=1:length(a)
